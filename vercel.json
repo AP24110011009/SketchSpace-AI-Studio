@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://lady-dubai-maintained-sim.trycloudflare.com/api/$1"
+    },
+    {
+      "source": "/report",
+      "destination": "https://lady-dubai-maintained-sim.trycloudflare.com/report"
+    },
+    {
+      "source": "/report.pdf",
+      "destination": "https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf"
+    },
+    {
+      "source": "/((?!samples/|assets/|favicon.ico).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -16,8 +16,8 @@
 ---
 
 > 🌐 **Live Public Deployment:** [https://sketch-space-ai-studio.vercel.app](https://sketch-space-ai-studio.vercel.app)  
-> 📑 **Interactive Academic Report:** [https://lady-dubai-maintained-sim.trycloudflare.com/report](https://lady-dubai-maintained-sim.trycloudflare.com/report)  
-> 📥 **Download Standalone PDF Report:** [https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf](https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf)
+> 📑 **Interactive Academic Report:** [https://sketch-space-ai-studio.vercel.app/report](https://sketch-space-ai-studio.vercel.app/report)  
+> 📥 **Download Standalone PDF Report:** [https://sketch-space-ai-studio.vercel.app/report.pdf](https://sketch-space-ai-studio.vercel.app/report.pdf)
 
 ## 1. Project Overview & Architectural Vision
 
