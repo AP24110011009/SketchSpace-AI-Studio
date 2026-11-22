@@ -35,7 +35,7 @@ Because your laptop possesses an actual NVIDIA RTX 3050 GPU, running the server 
    git init
    git add .
    git commit -m "Initial commit for SketchSpace AI"
-   git remote add origin https://github.com/AP24110011009/SketchSpace-AI.git
+   git remote add origin https://github.com/AP24110011009/SketchSpace-AI-Studio.git
    git push -u origin main
    ```
 3. In Render Dashboard, click **New +** -> **Web Service**.

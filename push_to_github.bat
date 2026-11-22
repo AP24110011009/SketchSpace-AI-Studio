@@ -2,7 +2,7 @@
 title Push to GitHub - AP24110011009
 echo =====================================================================
 echo       Pushing SketchSpace AI Studio to GitHub
-echo       Account: https://github.com/AP24110011009/SketchSpace-AI
+echo       Account: https://github.com/AP24110011009/SketchSpace-AI-Studio
 echo =====================================================================
 echo.
 cd /d "%~dp0"
@@ -10,7 +10,7 @@ cd /d "%~dp0"
 git config user.name "AP24110011009"
 git config user.email "AP24110011009@users.noreply.github.com"
 git remote remove origin >nul 2>&1
-git remote add origin https://github.com/AP24110011009/SketchSpace-AI.git
+git remote add origin https://github.com/AP24110011009/SketchSpace-AI-Studio.git
 git branch -M main
 
 echo Starting Git Push...
@@ -23,7 +23,7 @@ if %ERRORLEVEL% EQU 0 (
     echo.
     echo =====================================================================
     echo SUCCESS! Your code is now live on GitHub:
-    echo https://github.com/AP24110011009/SketchSpace-AI
+    echo https://github.com/AP24110011009/SketchSpace-AI-Studio
     echo =====================================================================
 ) else (
     echo.

@@ -22,7 +22,7 @@ export default function Navbar({ activePage, setActivePage, onOpenResumeModal })
 
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'studio', label: 'AI Designer', icon: Sparkles, badge: 'Core' },
+    { id: 'studio', label: 'SketchSpace AI Studio', icon: Sparkles, badge: 'Core' },
     { id: 'comparison', label: 'Before & After', icon: SlidersHorizontal },
     { id: 'gallery', label: 'Gallery', icon: ImageIcon },
     { id: 'about', label: 'About', icon: Info },
