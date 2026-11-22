@@ -83,6 +83,7 @@ def get_gallery():
     return orchestrator.demo_engine.list_gallery_items()
 
 @app.get("/api/samples/sketches/{filename}")
+@app.get("/samples/sketches/{filename}")
 def get_sample_sketch(filename: str):
     path = os.path.join(SKETCHES_DIR, filename)
     if os.path.exists(path):
@@ -90,6 +91,7 @@ def get_sample_sketch(filename: str):
     raise HTTPException(status_code=404, detail="Sample sketch not found")
 
 @app.get("/api/samples/renders/{filename}")
+@app.get("/samples/renders/{filename}")
 def get_sample_render(filename: str):
     path = os.path.join(RENDERS_DIR, filename)
     if os.path.exists(path):
@@ -137,7 +139,10 @@ async def generate_interior(
     Translates uploaded sketch into a realistic interior render.
     """
     try:
-        if sketch.content_type not in {"image/jpeg", "image/png", "image/jpg"}:
+        allowed_types = {"image/jpeg", "image/png", "image/jpg", "image/webp", "application/octet-stream"}
+        is_valid_type = sketch.content_type in allowed_types if sketch.content_type else False
+        is_valid_ext = any(sketch.filename.lower().endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".webp"]) if sketch.filename else True
+        if not (is_valid_type or is_valid_ext):
             raise HTTPException(status_code=400, detail="Please upload a JPG, JPEG, or PNG image.")
 
         contents = await sketch.read()

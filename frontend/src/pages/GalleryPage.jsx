@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Eye, Download, ArrowRight, Filter, X, Maximize2 } from 'lucide-react';
-
-const CATEGORIES = ['All', 'Living Rooms', 'Bedrooms', 'Kitchens', 'Bathrooms', 'Luxury Spaces', 'Offices'];
+import { GALLERY_DATA, CATEGORIES } from '../data/galleryData';
 
 export default function GalleryPage({ setActivePage, onSelectSample }) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(GALLERY_DATA);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedModalItem, setSelectedModalItem] = useState(null);
 
   useEffect(() => {
     fetch('/api/gallery')
-      .then(res => res.json())
-      .then(data => setItems(data))
-      .catch(err => console.error("Error loading gallery:", err));
+      .then(res => {
+        if (!res.ok) throw new Error("API offline or static deployment");
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          // Merge API data with verified local paths if needed
+          setItems(data);
+        }
+      })
+      .catch(err => {
+        console.log("Using local verified gallery dataset:", err.message);
+        setItems(GALLERY_DATA);
+      });
   }, []);
 
   const filteredItems = items.filter(item => {
@@ -21,8 +31,9 @@ export default function GalleryPage({ setActivePage, onSelectSample }) {
     if (selectedCategory === 'Bedrooms') return item.room_type === 'Bedroom';
     if (selectedCategory === 'Kitchens') return item.room_type === 'Kitchen';
     if (selectedCategory === 'Bathrooms') return item.room_type === 'Bathroom';
-    if (selectedCategory === 'Luxury Spaces') return item.style.includes('Luxury') || item.room_type === 'Kitchen';
-    if (selectedCategory === 'Offices') return item.room_type === 'Office';
+    if (selectedCategory === 'Dining Rooms') return item.room_type === 'Dining Room';
+    if (selectedCategory === 'Home Offices' || selectedCategory === 'Offices') return item.room_type === 'Home Office' || item.room_type === 'Office';
+    if (selectedCategory === 'Luxury Spaces') return (item.style && (item.style.includes('Luxury') || item.style.includes('Royal'))) || item.room_type === 'Kitchen';
     return true;
   });
 
@@ -74,7 +85,15 @@ export default function GalleryPage({ setActivePage, onSelectSample }) {
               <div className="relative aspect-4/3 overflow-hidden bg-[#FAF7F2]">
                 <img
                   src={item.render_url}
-                  alt={item.title}
+                  alt={item.title || item.alt || `${item.room_type} render`}
+                  loading="lazy"
+                  onError={(e) => {
+                    const fallbackPath = `./samples/renders/${item.id}.jpg`;
+                    if (e.target.src !== fallbackPath && !e.target.dataset.tried) {
+                      e.target.dataset.tried = '1';
+                      e.target.src = fallbackPath;
+                    }
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
 
@@ -172,7 +191,14 @@ export default function GalleryPage({ setActivePage, onSelectSample }) {
                   <div className="rounded-2xl overflow-hidden border border-[#DDD0BF] aspect-square bg-[#FAF8F5]">
                     <img
                       src={selectedModalItem.sketch_url}
-                      alt="Sketch"
+                      alt={`Hand-drawn sketch of ${selectedModalItem.title}`}
+                      onError={(e) => {
+                        const fb = `./samples/sketches/${selectedModalItem.id}.jpg`;
+                        if (!e.target.dataset.tried) {
+                          e.target.dataset.tried = '1';
+                          e.target.src = fb;
+                        }
+                      }}
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -185,7 +211,14 @@ export default function GalleryPage({ setActivePage, onSelectSample }) {
                   <div className="rounded-2xl overflow-hidden border border-[#DDD0BF] aspect-square">
                     <img
                       src={selectedModalItem.render_url}
-                      alt="Render"
+                      alt={`Photorealistic interior render of ${selectedModalItem.title}`}
+                      onError={(e) => {
+                        const fb = `./samples/renders/${selectedModalItem.id}.jpg`;
+                        if (!e.target.dataset.tried) {
+                          e.target.dataset.tried = '1';
+                          e.target.src = fb;
+                        }
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </div>

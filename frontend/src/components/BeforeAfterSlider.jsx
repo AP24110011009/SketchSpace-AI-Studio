@@ -63,6 +63,11 @@ export default function BeforeAfterSlider({
         <img
           src={renderImage}
           alt={renderLabel}
+          onError={(e) => {
+            if (renderImage && typeof renderImage === 'string' && renderImage.startsWith('/api/samples/')) {
+              e.target.src = renderImage.replace('/api/samples/', './samples/');
+            }
+          }}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
@@ -70,6 +75,11 @@ export default function BeforeAfterSlider({
         <img
           src={sketchImage}
           alt={sketchLabel}
+          onError={(e) => {
+            if (sketchImage && typeof sketchImage === 'string' && sketchImage.startsWith('/api/samples/')) {
+              e.target.src = sketchImage.replace('/api/samples/', './samples/');
+            }
+          }}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         />

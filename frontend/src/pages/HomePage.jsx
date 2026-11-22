@@ -3,8 +3,8 @@ import { ArrowRight, Sparkles, CheckCircle, Wand2, ShieldCheck, Layers, Eye, Ref
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 export default function HomePage({ setActivePage, onSelectSample, onOpenResumeModal }) {
-  const heroSketch = "/api/samples/sketches/living_room_modern.jpg";
-  const heroRender = "/api/samples/renders/living_room_modern.jpg";
+  const heroSketch = "./samples/sketches/living_room_modern.jpg";
+  const heroRender = "./samples/renders/living_room_modern.jpg";
 
   const workflowSteps = [
     {
@@ -275,9 +275,12 @@ export default function HomePage({ setActivePage, onSelectSample, onOpenResumeMo
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { id: 'bedroom_scandinavian', title: 'Scandinavian Bedroom', style: 'Ash Wood & Fluted Slats' },
-              { id: 'kitchen_luxury', title: 'Marble Waterfall Kitchen', style: 'Calacatta Marble & Brass' },
-              { id: 'bathroom_contemporary', title: 'Spa Travertine Bathroom', style: 'Soaking Tub & Stone Wall' },
+              { id: 'living_room_modern', title: 'Modern Luxury Living Room', style: 'Bouclé, European Oak & Daylight' },
+              { id: 'bedroom_scandinavian', title: 'Master Bedroom Suite', style: 'Ash Wood & Fluted Slat Accents' },
+              { id: 'kitchen_luxury', title: 'Marble Waterfall Kitchen', style: 'Calacatta Marble & Brass Barstools' },
+              { id: 'living_traditional_indian', title: 'Traditional Indian Salon', style: 'Teak Pillars & Jaali Screen' },
+              { id: 'living_minimalist', title: 'Zen Minimalist Living', style: 'Travertine Stone & Low Linen Profile' },
+              { id: 'bathroom_contemporary', title: 'Spa Travertine Bathroom', style: 'Freestanding Tub & Garden Window' },
             ].map((room) => (
               <div 
                 key={room.id}
@@ -286,12 +289,20 @@ export default function HomePage({ setActivePage, onSelectSample, onOpenResumeMo
                   setActivePage('studio');
                   window.scrollTo(0, 0);
                 }}
-                className="group relative rounded-2xl overflow-hidden border border-[#E5D7C7] shadow-sm hover:shadow-xl cursor-pointer transition-all"
+                className="group relative rounded-2xl overflow-hidden border border-[#E5D7C7] shadow-sm hover:shadow-xl cursor-pointer transition-all bg-white"
               >
                 <div className="aspect-4/3 overflow-hidden bg-[#FAF7F2]">
                   <img
-                    src={`/api/samples/renders/${room.id}.jpg`}
-                    alt={room.title}
+                    src={`./samples/renders/${room.id}.jpg`}
+                    alt={`${room.title} photorealistic interior design render`}
+                    loading="lazy"
+                    onError={(e) => {
+                      const fallback = `/api/samples/renders/${room.id}.jpg`;
+                      if (!e.target.dataset.tried) {
+                        e.target.dataset.tried = '1';
+                        e.target.src = fallback;
+                      }
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>

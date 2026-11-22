@@ -5,7 +5,7 @@ import BeforeAfterSlider from '../components/BeforeAfterSlider';
 const COMPARISON_GALLERY = [
   {
     id: 'bedroom_scandinavian',
-    room: 'Bedroom',
+    room: 'Master Bedroom',
     title: 'Master Architectural Bedroom Suite',
     style: 'Modern Luxury',
     palette: 'Warm Oak, Calacatta & Soft Linen',
@@ -20,6 +20,33 @@ const COMPARISON_GALLERY = [
     palette: 'Warm Beige & European Oak',
     desc: 'Notice how the curved bouclé sofa, fluted wood coffee table, accent lounge chairs, floor-to-ceiling windows, and sculptural lighting from the sketch are preserved with authentic physical materials and soft natural daylight.',
     metrics: { structuralMatch: '98.6%', latency: '0.1s', resolution: '1024x1024 HD' }
+  },
+  {
+    id: 'living_traditional_indian',
+    room: 'Traditional Indian',
+    title: 'Heritage Traditional Indian Living Salon',
+    style: 'Traditional Indian',
+    palette: 'Burma Teak, Brass & Silk Brocade',
+    desc: 'Translates architectural sketch into carved Burma teak wood pillars, artisanal brass urli with floating marigolds, geometric jaali lattice partition screen, warm ambient cove lighting, and plush ivory rug.',
+    metrics: { structuralMatch: '99.1%', latency: '0.1s', resolution: '1024x1024 HD' }
+  },
+  {
+    id: 'living_minimalist',
+    room: 'Zen Minimalist',
+    title: 'Zen Luxury Minimalist Living Room',
+    style: 'Minimalist',
+    palette: 'Travertine, Micro-Cement & Oatmeal Linen',
+    desc: 'Continuous travertine stone floor, raw micro-cement walls, low-profile modular linen sofa, monolithic sandstone coffee table, and floor-to-ceiling glass looking out to a serene courtyard garden.',
+    metrics: { structuralMatch: '99.3%', latency: '0.1s', resolution: '1024x1024 HD' }
+  },
+  {
+    id: 'living_royal_luxury',
+    room: 'Royal Luxury',
+    title: 'Regal Palace Salon & Living Room',
+    style: 'Royal Interior',
+    palette: 'Calacatta Gold, Sapphire Velvet & Gilded Boiserie',
+    desc: 'Double-height ceilings, classical Parisian boiserie moldings with antiqued gold leaf, Baccarat crystal chandelier, and sapphire/champagne gold velvet furnishings faithfully translated from hand-drawn blueprints.',
+    metrics: { structuralMatch: '98.9%', latency: '0.1s', resolution: '1024x1024 HD' }
   },
   {
     id: 'kitchen_luxury',
@@ -106,8 +133,8 @@ export default function ComparisonPage({ setActivePage, onSelectSample }) {
           {/* Left: Draggable Split Slider (7 cols) */}
           <div className="lg:col-span-7">
             <BeforeAfterSlider
-              sketchImage={`/api/samples/sketches/${activeRoom.id}.jpg`}
-              renderImage={`/api/samples/renders/${activeRoom.id}.jpg`}
+              sketchImage={`./samples/sketches/${activeRoom.id}.jpg`}
+              renderImage={`./samples/renders/${activeRoom.id}.jpg`}
               sketchLabel="Original Hand-Drawn Sketch"
               renderLabel={`AI Render • ${activeRoom.style}`}
               aspectRatio="aspect-4/3"

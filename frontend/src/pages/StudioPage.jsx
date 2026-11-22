@@ -62,14 +62,17 @@ const COLOR_THEMES = [
 ];
 
 const SAMPLE_PRESETS = [
+  { id: 'living_room_modern', name: 'Modern Living Room', room: 'Living Room', style: 'Modern Luxury', flooring: 'Wooden Flooring', wall: 'Wooden Panels', lighting: 'Natural Daylight', color: 'Beige and White' },
+  { id: 'bedroom_scandinavian', name: 'Master Bedroom Suite', room: 'Bedroom', style: 'Modern Luxury', flooring: 'Wooden Flooring', wall: 'White Paint', lighting: 'Natural Daylight', color: 'Beige and White' },
+  { id: 'living_traditional_indian', name: 'Traditional Indian Living', room: 'Living Room', style: 'Traditional Indian', flooring: 'Wooden Flooring', wall: 'Textured Walls', lighting: 'Warm Lighting', color: 'Brown and Cream' },
+  { id: 'living_minimalist', name: 'Zen Minimalist Living', room: 'Living Room', style: 'Minimalist', flooring: 'Wooden Flooring', wall: 'White Paint', lighting: 'Natural Daylight', color: 'Beige and White' },
+  { id: 'living_royal_luxury', name: 'Royal Luxury Salon', room: 'Living Room', style: 'Royal Interior', flooring: 'Marble Flooring', wall: 'Marble Wall', lighting: 'Luxury Chandelier', color: 'Black and Gold' },
+  { id: 'kitchen_luxury', name: 'Calacatta Luxury Kitchen', room: 'Kitchen', style: 'Contemporary', flooring: 'Marble Flooring', wall: 'Marble Wall', lighting: 'LED Lighting', color: 'White and Grey' },
+  { id: 'bathroom_contemporary', name: 'Spa Travertine Bathroom', room: 'Bathroom', style: 'Contemporary', flooring: 'Marble Flooring', wall: 'Textured Walls', lighting: 'Warm Lighting', color: 'Beige and White' },
+  { id: 'office_industrial', name: 'Executive Studio Office', room: 'Home Office', style: 'Industrial', flooring: 'Concrete', wall: 'Textured Walls', lighting: 'Warm Lighting', color: 'Brown and Cream' },
+  { id: 'dining_japandi', name: 'Japandi Zen Dining', room: 'Dining Room', style: 'Japandi', flooring: 'Wooden Flooring', wall: 'Wooden Panels', lighting: 'Natural Daylight', color: 'Beige and White' },
   { id: 'user_bathroom_freestanding', name: 'Bath (Window & Tub)', room: 'Bathroom', style: 'Modern Luxury', flooring: 'Ceramic Tiles', wall: 'White Paint', lighting: 'Natural Daylight', color: 'Beige and White' },
   { id: 'user_bedroom_desk', name: 'Bed (Desk & Window)', room: 'Bedroom', style: 'Scandinavian', flooring: 'Wooden Flooring', wall: 'White Paint', lighting: 'Natural Daylight', color: 'Beige and White' },
-  { id: 'bedroom_scandinavian', name: 'Master Bedroom', room: 'Bedroom', style: 'Modern Luxury', flooring: 'Wooden Flooring', wall: 'White Paint', lighting: 'Natural Daylight', color: 'Beige and White' },
-  { id: 'living_room_modern', name: 'Living Room', room: 'Living Room', style: 'Modern Luxury', flooring: 'Wooden Flooring', wall: 'Wooden Panels', lighting: 'Natural Daylight', color: 'Beige and White' },
-  { id: 'kitchen_luxury', name: 'Luxury Kitchen', room: 'Kitchen', style: 'Contemporary', flooring: 'Marble Flooring', wall: 'Marble Wall', lighting: 'LED Lighting', color: 'White and Grey' },
-  { id: 'bathroom_contemporary', name: 'Spa Bathroom', room: 'Bathroom', style: 'Contemporary', flooring: 'Marble Flooring', wall: 'Textured Walls', lighting: 'Warm Lighting', color: 'Beige and White' },
-  { id: 'office_industrial', name: 'Executive Office', room: 'Home Office', style: 'Industrial', flooring: 'Concrete', wall: 'Textured Walls', lighting: 'Warm Lighting', color: 'Brown and Cream' },
-  { id: 'dining_japandi', name: 'Japandi Dining', room: 'Dining Room', style: 'Japandi', flooring: 'Wooden Flooring', wall: 'Wooden Panels', lighting: 'Natural Daylight', color: 'Beige and White' },
 ];
 
 const ROOM_TYPE_TO_PRESET = {
@@ -149,23 +152,36 @@ export default function StudioPage({ initialSampleId = null }) {
     setLighting(preset.lighting);
     setColorTheme(preset.color);
 
+    // Instant zero-latency preview
+    const sketchUrl = `./samples/sketches/${preset.id}.jpg`;
+    setSketchPreview(sketchUrl);
+    setCenterMode('preview');
+    setErrorMsg(null);
+
     try {
-      const res = await fetch(`/api/samples/sketches/${preset.id}.jpg`);
-      const blob = await res.blob();
-      const file = new File([blob], `${preset.id}.jpg`, { type: 'image/jpeg' });
-      setSketchFile(file);
-      setSketchPreview(URL.createObjectURL(blob));
-      setCenterMode('preview');
-      setErrorMsg(null);
+      let res = await fetch(sketchUrl);
+      if (!res.ok) {
+        res = await fetch(`/api/samples/sketches/${preset.id}.jpg`);
+      }
+      if (res.ok) {
+        const blob = await res.blob();
+        const file = new File([blob], `${preset.id}.jpg`, { type: 'image/jpeg' });
+        setSketchFile(file);
+      }
     } catch (e) {
-      console.error("Failed to load preset sketch:", e);
+      console.warn("Using sample sketch reference:", e);
     }
   };
 
   const handleRoomSelect = (selectedRoom) => {
     setRoomType(selectedRoom);
     if (!isCustomUpload) {
-      const pId = ROOM_TYPE_TO_PRESET[selectedRoom];
+      let pId = ROOM_TYPE_TO_PRESET[selectedRoom];
+      if (selectedRoom === 'Living Room') {
+        if (interiorStyle === 'Traditional Indian') pId = 'living_traditional_indian';
+        else if (interiorStyle === 'Minimalist') pId = 'living_minimalist';
+        else if (interiorStyle === 'Royal Interior') pId = 'living_royal_luxury';
+      }
       if (pId) loadSampleById(pId);
     }
   };
@@ -793,6 +809,12 @@ export default function StudioPage({ initialSampleId = null }) {
                     <img
                       src={sketchPreview}
                       alt="Uploaded Sketch Preview"
+                      onError={(e) => {
+                        if (activePresetId && !e.target.dataset.tried) {
+                          e.target.dataset.tried = '1';
+                          e.target.src = `./samples/sketches/${activePresetId}.jpg`;
+                        }
+                      }}
                       className="w-full h-full object-contain p-2"
                     />
                     <div className="absolute top-3 right-3 flex space-x-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
@@ -882,8 +904,16 @@ export default function StudioPage({ initialSampleId = null }) {
                     >
                       <div className="w-11 h-11 rounded-lg overflow-hidden bg-white border border-[#E5DACD] flex-shrink-0">
                         <img
-                          src={`/api/samples/sketches/${sample.id}.jpg`}
+                          src={`./samples/sketches/${sample.id}.jpg`}
                           alt={sample.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            const fb = `/api/samples/sketches/${sample.id}.jpg`;
+                            if (!e.target.dataset.tried) {
+                              e.target.dataset.tried = '1';
+                              e.target.src = fb;
+                            }
+                          }}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -1132,18 +1162,74 @@ export default function StudioPage({ initialSampleId = null }) {
               </div>
             )}
 
-            {/* EMPTY STATE */}
+            {/* ARCHITECTURAL PREVIEW / READY TO RENDER STATE (NEVER BLANK) */}
             {!isGenerating && !result && (
-              <div className="aspect-square rounded-2xl bg-[#FAF9F6] border-2 border-dashed border-[#DDD0BF] p-6 flex flex-col items-center justify-center text-center">
-                <div className="w-14 h-14 rounded-2xl bg-[#EFE8DD] flex items-center justify-center text-[#8C5D33] mb-3">
-                  <Sparkles className="w-7 h-7" />
+              <div className="space-y-4">
+                {errorMsg && (
+                  <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start space-x-2.5">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-600 mt-0.5" />
+                    <div>
+                      <p className="font-bold">Generation Notice</p>
+                      <p className="mt-0.5">{errorMsg}</p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="relative rounded-2xl overflow-hidden border border-[#DDD0BF] shadow-sm aspect-square bg-[#FAF9F6]">
+                  {activePresetId ? (
+                    <BeforeAfterSlider
+                      sketchImage={`./samples/sketches/${activePresetId}.jpg`}
+                      renderImage={`./samples/renders/${activePresetId}.jpg`}
+                      sketchLabel="Input Sketch"
+                      renderLabel={`Archetype Preview • ${interiorStyle}`}
+                      aspectRatio="aspect-square"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                      <div className="w-14 h-14 rounded-2xl bg-[#EFE8DD] flex items-center justify-center text-[#8C5D33] mb-3">
+                        <Sparkles className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-sm font-bold text-[#231E1B]">
+                        Ready to Render
+                      </h3>
+                      <p className="text-xs text-[#7A6C60] mt-1 max-w-xs">
+                        Configure your architectural specifications on the left, then click <strong>"Generate Realistic Interior"</strong>.
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="absolute bottom-2 left-2 right-2 z-20 pointer-events-none">
+                    <div className="px-3 py-1.5 rounded-xl bg-black/70 backdrop-blur-md text-white text-center text-xs font-semibold flex items-center justify-center space-x-1.5 shadow-md">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+                      <span>Ready to Synthesize • Click "Generate Realistic Interior"</span>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-sm font-bold text-[#231E1B]">
-                  Your Realistic Interior Render
-                </h3>
-                <p className="text-xs text-[#7A6C60] mt-1 max-w-xs">
-                  Upload a sketch in the center panel, customize specifications on the left, and click <strong>"Generate Realistic Interior"</strong>.
-                </p>
+
+                {/* Pre-render Specifications Preview */}
+                <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#E5DACD] space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-[#3D332B] flex items-center space-x-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Target Architecture</span>
+                    </span>
+                    <span className="font-semibold text-[#8C5D33]">{roomType} • {interiorStyle}</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-center text-[10px] pt-1 border-t border-[#EBDDCF]">
+                    <div>
+                      <span className="text-[#7A6C60] block">Flooring</span>
+                      <span className="font-bold text-[#231E1B] truncate block">{flooring}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#7A6C60] block">Walls</span>
+                      <span className="font-bold text-[#231E1B] truncate block">{wallDesign}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#7A6C60] block">Lighting</span>
+                      <span className="font-bold text-[#231E1B] truncate block">{lighting}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 

@@ -88,11 +88,42 @@ class DemoEngine:
                 "palette": "Warm Oak, Crisp Linen & Soft Greenery",
                 "features": "Slatted oak queen bed with white linen bedding, left nightstand with table lamp, double-hung window with sheer drapes, study desk with spindle chair, matching solid wood dresser",
                 "metrics": {"ssim": 0.961, "psnr": 33.0, "edge_alignment": "99.0%"}
+            },
+            "living_traditional_indian": {
+                "name": "Heritage Traditional Indian Living Salon",
+                "room": "Living Room",
+                "style": "Traditional Indian",
+                "palette": "Burma Teak, Brass & Silk Brocade",
+                "features": "Carved Burma teak wood pillars, artisanal brass urli with floating marigolds, geometric jaali lattice partition screen, warm ambient cove lighting, plush ivory rug",
+                "metrics": {"ssim": 0.958, "psnr": 32.8, "edge_alignment": "99.1%"}
+            },
+            "living_minimalist": {
+                "name": "Zen Luxury Minimalist Living Room",
+                "room": "Living Room",
+                "style": "Minimalist",
+                "palette": "Travertine, Micro-Cement & Oatmeal Linen",
+                "features": "Continuous travertine stone floor, raw micro-cement walls, low-profile modular linen sofa, monolithic sandstone coffee table, floor-to-ceiling glass to zen garden",
+                "metrics": {"ssim": 0.963, "psnr": 33.2, "edge_alignment": "99.3%"}
+            },
+            "living_royal_luxury": {
+                "name": "Regal Palace Salon & Living Room",
+                "room": "Living Room",
+                "style": "Royal Interior",
+                "palette": "Calacatta Gold, Sapphire Velvet & Gilded Boiserie",
+                "features": "Double-height ceilings, classical Parisian boiserie moldings with antiqued gold leaf, Baccarat crystal chandelier, sapphire and champagne gold velvet furnishings",
+                "metrics": {"ssim": 0.954, "psnr": 32.5, "edge_alignment": "98.9%"}
             }
         }
 
     def get_best_match(self, room_type: str, interior_style: str = "") -> tuple[str, dict]:
         """Finds closest matching verified architectural sample pair."""
+        if room_type == "Living Room":
+            if "Traditional" in interior_style or "Indian" in interior_style:
+                return "living_traditional_indian", self.available_samples["living_traditional_indian"]
+            if "Minimalist" in interior_style:
+                return "living_minimalist", self.available_samples["living_minimalist"]
+            if "Royal" in interior_style:
+                return "living_royal_luxury", self.available_samples["living_royal_luxury"]
         key = ROOM_MAPPING.get(room_type, "living_room_modern")
         info = self.available_samples.get(key, self.available_samples["living_room_modern"])
         return key, info
