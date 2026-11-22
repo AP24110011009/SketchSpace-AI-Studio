@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Sparkles, SlidersHorizontal, Image as ImageIcon, Info, Mail, Cpu, Menu, X, ArrowRight, Award, FileText } from 'lucide-react';
+import { Home, Sparkles, SlidersHorizontal, Image as ImageIcon, Info, Mail, Cpu, Menu, X, ArrowRight, Award, FileText, Presentation } from 'lucide-react';
 
 export default function Navbar({ activePage, setActivePage, onOpenResumeModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -92,6 +92,17 @@ export default function Navbar({ activePage, setActivePage, onOpenResumeModal })
 
           {/* Right Action & GPU Status */}
           <div className="hidden lg:flex items-center space-x-3">
+            {/* Project PPT Button */}
+            <a
+              href="/SketchSpace_AI_Presentation.pptx"
+              download="SketchSpace_AI_Presentation.pptx"
+              className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-bold text-[#8C5D33] bg-[#FAF5EE] hover:bg-[#F3EAD9] border border-[#DDD0BF] transition-all cursor-pointer shadow-xs"
+              title="Download Project PowerPoint Presentation (.pptx)"
+            >
+              <Presentation className="w-4 h-4 text-[#8C5D33]" />
+              <span>Project PPT</span>
+            </a>
+
             {/* Project Report Button */}
             <a
               href="/report"
@@ -178,6 +189,23 @@ export default function Navbar({ activePage, setActivePage, onOpenResumeModal })
           })}
           
           <div className="pt-2 space-y-2">
+            <a
+              href="/SketchSpace_AI_Presentation.pptx"
+              download="SketchSpace_AI_Presentation.pptx"
+              className="w-full flex items-center justify-center space-x-2 py-2.5 rounded-xl text-[#8C5D33] font-bold bg-[#FAF5EE] border border-[#DDD0BF]"
+            >
+              <Presentation className="w-4 h-4 text-[#8C5D33]" />
+              <span>Download Project PPT (.pptx)</span>
+            </a>
+            <a
+              href="/report"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center space-x-2 py-2.5 rounded-xl text-[#0E7490] font-bold bg-[#E0F2FE] border border-[#7DD3FC]"
+            >
+              <FileText className="w-4 h-4 text-[#0284C7]" />
+              <span>View Academic Report</span>
+            </a>
             <button
               onClick={() => { onOpenResumeModal(); setMobileMenuOpen(false); }}
               className="w-full flex items-center justify-center space-x-2 py-2.5 rounded-xl text-[#8C5D33] font-bold bg-[#EFE7DC] border border-[#DDD0BF]"

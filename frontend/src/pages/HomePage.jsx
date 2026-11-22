@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, CheckCircle, Wand2, ShieldCheck, Layers, Eye, RefreshCw, Zap, Sliders, Award, FileText, Cpu, Check, Terminal } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle, Wand2, ShieldCheck, Layers, Eye, RefreshCw, Zap, Sliders, Award, FileText, Cpu, Check, Terminal, Presentation } from 'lucide-react';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 export default function HomePage({ setActivePage, onSelectSample, onOpenResumeModal }) {
@@ -108,6 +108,16 @@ export default function HomePage({ setActivePage, onSelectSample, onOpenResumeMo
                   <Award className="w-4 h-4 text-[#A87547]" />
                   <span>Resume Case Study</span>
                 </button>
+
+                <a
+                  href="/SketchSpace_AI_Presentation.pptx"
+                  download="SketchSpace_AI_Presentation.pptx"
+                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-3.5 rounded-2xl font-semibold text-[#8C5D33] bg-[#FAF5EE] hover:bg-[#F3EAD9] border border-[#DDD0BF] shadow-xs hover:shadow transition-all cursor-pointer"
+                  title="Download Project PowerPoint Presentation (.pptx)"
+                >
+                  <Presentation className="w-4 h-4 text-[#8C5D33]" />
+                  <span>Download PPT</span>
+                </a>
               </div>
 
               {/* Trust & Metric Pill Row */}

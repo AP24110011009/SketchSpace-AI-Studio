@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, Copy, Check, FileText, Cpu, Layers, Zap, Award, 
-  ExternalLink, ChevronRight, Terminal, BarChart3, HelpCircle 
+  ExternalLink, ChevronRight, Terminal, BarChart3, HelpCircle, Presentation 
 } from 'lucide-react';
 
 export default function ResumeModal({ isOpen, onClose }) {
@@ -349,10 +349,26 @@ export default function ResumeModal({ isOpen, onClose }) {
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-t border-[#E8DCCF] flex items-center justify-between">
-          <span className="text-xs font-medium text-[#7A6C60]">
-            SketchSpace AI • Generative AI Capstone Project
-          </span>
+        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-t border-[#E8DCCF] flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="/SketchSpace_AI_Presentation.pptx"
+              download="SketchSpace_AI_Presentation.pptx"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#8C5D33] bg-white border border-[#DDD0BF] hover:bg-[#F3EDE3] transition-colors flex items-center space-x-1.5 shadow-2xs"
+            >
+              <Presentation className="w-3.5 h-3.5 text-[#8C5D33]" />
+              <span>Download PPT (.pptx)</span>
+            </a>
+            <a
+              href="/report.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#0E7490] bg-white border border-[#7DD3FC] hover:bg-[#F0F9FF] transition-colors flex items-center space-x-1.5 shadow-2xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#0284C7]" />
+              <span>Project Report (PDF)</span>
+            </a>
+          </div>
           <button
             onClick={onClose}
             className="px-5 py-2 rounded-xl text-xs font-bold text-[#231E1B] bg-white border border-[#DDD0BF] hover:bg-[#F3EDE3] transition-colors cursor-pointer"

@@ -2,7 +2,8 @@
 ### Commercial-Grade Generative AI Platform • Image-to-Image Architectural Translation (Team 9)
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-SketchSpace%20AI%20Studio-success?logo=vercel&logoColor=white)](https://sketch-space-ai-studio.vercel.app)
-[![Project Report](https://img.shields.io/badge/Project%20Report-21%20Pages%20PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf)
+[![Project Presentation](https://img.shields.io/badge/Presentation-18%20Slides%20PPTX-orange?logo=microsoftpowerpoint&logoColor=white)](https://sketch-space-ai-studio.vercel.app/SketchSpace_AI_Presentation.pptx)
+[![Project Report](https://img.shields.io/badge/Project%20Report-21%20Pages%20PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://sketch-space-ai-studio.vercel.app/report.pdf)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1%2BCUDA-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -17,7 +18,8 @@
 
 > 🌐 **Live Public Deployment:** [https://sketch-space-ai-studio.vercel.app](https://sketch-space-ai-studio.vercel.app)  
 > 📑 **Interactive Academic Report:** [https://sketch-space-ai-studio.vercel.app/report](https://sketch-space-ai-studio.vercel.app/report)  
-> 📥 **Download Standalone PDF Report:** [https://sketch-space-ai-studio.vercel.app/report.pdf](https://sketch-space-ai-studio.vercel.app/report.pdf)
+> 📥 **Download Standalone PDF Report:** [https://sketch-space-ai-studio.vercel.app/report.pdf](https://sketch-space-ai-studio.vercel.app/report.pdf)  
+> 📊 **Download PowerPoint Presentation:** [https://sketch-space-ai-studio.vercel.app/SketchSpace_AI_Presentation.pptx](https://sketch-space-ai-studio.vercel.app/SketchSpace_AI_Presentation.pptx)
 
 ## 1. Project Overview & Architectural Vision
 
