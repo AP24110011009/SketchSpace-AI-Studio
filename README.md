@@ -1,7 +1,7 @@
 # SketchSpace AI Studio: From Hand-Drawn Sketch to Photorealistic Interior Design
 ### Commercial-Grade Generative AI Platform • Image-to-Image Architectural Translation (Team 9)
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-SketchSpace%20AI%20Studio-success?logo=cloudflare&logoColor=white)](https://lady-dubai-maintained-sim.trycloudflare.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-SketchSpace%20AI%20Studio-success?logo=vercel&logoColor=white)](https://sketch-space-ai-studio.vercel.app)
 [![Project Report](https://img.shields.io/badge/Project%20Report-21%20Pages%20PDF-blue?logo=adobeacrobatreader&logoColor=white)](https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1%2BCUDA-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -9,9 +9,13 @@
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Hardware](https://img.shields.io/badge/GPU-RTX%203050%20(6GB)-76B900?logo=nvidia&logoColor=white)](https://www.nvidia.com/)
 
+## Application Preview
+
+![SketchSpace AI Studio homepage preview](assets/sketchspace-homepage-preview.png)
+
 ---
 
-> 🌐 **Live Public Deployment:** [https://lady-dubai-maintained-sim.trycloudflare.com](https://lady-dubai-maintained-sim.trycloudflare.com)  
+> 🌐 **Live Public Deployment:** [https://sketch-space-ai-studio.vercel.app](https://sketch-space-ai-studio.vercel.app)  
 > 📑 **Interactive Academic Report:** [https://lady-dubai-maintained-sim.trycloudflare.com/report](https://lady-dubai-maintained-sim.trycloudflare.com/report)  
 > 📥 **Download Standalone PDF Report:** [https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf](https://lady-dubai-maintained-sim.trycloudflare.com/report.pdf)
 
