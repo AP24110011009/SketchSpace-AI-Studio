@@ -1,0 +1,27 @@
+# SketchSpace AI — Project Dependencies
+# Tested on Windows with Python 3.12, PyTorch 2.5.1+cu121 and NVIDIA RTX 3050
+
+# Core Frameworks & API
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.12
+
+# Generative AI & Deep Learning
+torch>=2.5.0
+torchvision>=0.20.0
+diffusers<=0.32.2
+transformers<5.0.0,>=4.44.0
+tokenizers<=0.23.0
+accelerate>=1.0.0
+safetensors>=0.4.0
+huggingface-hub<1.0,>=0.34.0
+
+# Computer Vision & Image Processing
+opencv-python>=4.10.0
+pillow>=10.4.0
+numpy>=1.26.0
+
+# Evaluation & Metrics
+scipy>=1.13.0
+scikit-image>=0.24.0
+requests>=2.32.0

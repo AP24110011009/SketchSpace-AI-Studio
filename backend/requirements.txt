@@ -1,0 +1,17 @@
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.12
+torch>=2.2.0
+torchvision>=0.17.0
+diffusers<=0.32.2
+transformers<5.0.0,>=4.44.0
+tokenizers<=0.23.0
+accelerate>=0.30.0
+safetensors>=0.4.0
+huggingface-hub<1.0,>=0.24.0
+opencv-python-headless>=4.10.0
+pillow>=10.4.0
+numpy>=1.26.0
+scipy>=1.13.0
+scikit-image>=0.24.0
+requests>=2.32.0
