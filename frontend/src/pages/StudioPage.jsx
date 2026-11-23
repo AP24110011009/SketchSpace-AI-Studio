@@ -274,14 +274,41 @@ export default function StudioPage({ initialSampleId = null }) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Generation request failed');
+        let errorDetail = '';
+        try {
+          const contentType = response.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const errorData = await response.json();
+            errorDetail = errorData.detail || errorData.message || '';
+          } else {
+            const errorText = await response.text();
+            if (response.status === 502 || response.status === 503 || response.status === 504 || errorText.includes('DNS_HOSTNAME_NOT_FOUND') || errorText.includes('An error occurred')) {
+              errorDetail = 'Backend AI engine is currently offline or unreachable. Please launch "run_app.bat" locally to run GPU inference on http://127.0.0.1:8000.';
+            } else {
+              errorDetail = errorText.slice(0, 160);
+            }
+          }
+        } catch {
+          errorDetail = `Backend server unreachable (HTTP ${response.status}).`;
+        }
+
+        throw new Error(errorDetail || `Generation failed (HTTP ${response.status}). Please check backend status.`);
       }
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Received unexpected non-JSON response from server. Please verify the backend connection.');
+      }
       setResult(data);
     } catch (err) {
-      setErrorMsg(err.message || 'Generation failed. Please verify that the backend server is running.');
+      console.error('Generation error:', err);
+      let displayError = err.message || 'Generation failed. Please verify that the backend server is running.';
+      if (displayError.includes('Unexpected token') || displayError.includes('is not valid JSON')) {
+        displayError = 'Backend AI engine is currently offline or unreachable. Please run "run_app.bat" locally to start the GPU server.';
+      }
+      setErrorMsg(displayError);
     } finally {
       clearInterval(stageTimer);
       setIsGenerating(false);

@@ -32,11 +32,12 @@ export default function ContactPage() {
         method: 'POST',
         body: body,
       });
+      if (!res.ok) throw new Error('Backend offline');
       const data = await res.json();
       setSuccessResponse(data.message || 'Message sent successfully!');
       setFormData({ name: '', email: '', subject: 'Gen AI Project Inquiry', message: '' });
     } catch (err) {
-      setErrorMessage('Failed to send message. Please ensure the backend is running.');
+      setErrorMessage('Failed to send message. Please ensure the backend server is running.');
     } finally {
       setIsSubmitting(false);
     }
