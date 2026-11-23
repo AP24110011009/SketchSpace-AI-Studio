@@ -1,5 +1,47 @@
-# SketchSpace AI: AI-Powered Architectural Sketch-to-Realistic Interior Generator
-### Comprehensive Project Documentation & Technical Report
+# SketchSpace AI Studio: From Hand-Drawn Sketch to Photorealistic Interior Design
+### Comprehensive Academic Project Report & Technical Documentation
+**Department of Computer Science and Engineering • SRM University–AP**
+
+---
+
+## BONAFIDE CERTIFICATE
+
+Certified that this project report titled **“SketchSpace AI Studio: From Hand-Drawn Sketch to Photorealistic Interior Design”** is the bonafide work of the students of **Team 9**, Department of Computer Science and Engineering, **SRM University–AP**, who carried out the project work under my supervision.
+
+<br>
+
+**Faculty Mentor:**  
+**Dr. Sourav Kumar**  
+Assistant Professor  
+Department of Computer Science and Engineering  
+SRM University–AP  
+
+<br>
+
+**Head of Department / Dean:**  
+**Prof. C. V. Tomy**  
+Dean, School of Engineering and Sciences  
+SRM University–AP  
+
+---
+
+## DECLARATION
+
+We hereby declare that the project titled **“SketchSpace AI Studio: From Hand-Drawn Sketch to Photorealistic Interior Design”** submitted to the **Department of Computer Science and Engineering, SRM University–AP**, is an authentic record of our original work carried out under the guidance of **Dr. Sourav Kumar**. The matter presented in this report has not been submitted in part or full to any other University or Institute for the award of any degree or diploma.
+
+---
+
+## ACKNOWLEDGEMENT
+
+We express our sincere gratitude to the Almighty for providing us with the strength, knowledge, and perseverance required to complete this project successfully.
+
+We extend our heartfelt thanks to the Vice Chancellor, **Prof. Ch. Satish Kumar**, and the Dean, **Prof. C. V. Tomy**, **SRM University–AP**, for providing an outstanding academic environment, high-performance computing infrastructure, and facilities that supported our learning and project development.
+
+We are deeply grateful to our Faculty Mentor, **Dr. Sourav Kumar**, Assistant Professor, Department of Computer Science and Engineering, for his valuable guidance, continuous encouragement, and constructive suggestions throughout the development of this project. His insights into Generative AI, Deep Learning architectures, and Computer Vision pipelines provided the foundation for engineering ControlNet-guided latent diffusion, structural scribble conditioning, and real-time inference optimization.
+
+We would also like to thank the faculty members of the Department of Computer Science and Engineering, our teammates, and our families for their constant support, motivation, and encouragement during the completion of this project.
+
+This project, titled **“SketchSpace AI Studio: From Hand-Drawn Sketch to Photorealistic Interior Design,”** has been developed as a commercial-grade Generative AI software prototype to perform paired image-to-image architectural translation while preserving spatial geometry. The results, structural fidelity benchmarks, and observations presented in this report are based on the empirical evaluations and live testing conducted using the developed application.
 
 ---
 
